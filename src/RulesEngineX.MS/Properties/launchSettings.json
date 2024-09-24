@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "RulesEngineX.MS": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
