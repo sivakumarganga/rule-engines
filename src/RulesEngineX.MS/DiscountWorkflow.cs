@@ -25,11 +25,19 @@ namespace RulesEngineX.MS
                 //workflows[0].Rules.ToList()[0].RuleExpressionType = RuleExpressionType.LambdaExpression;
 
 
-                dynamic input1 = new { name = "hello", email = "abcd@xyz.com", creditHistory = "good", country = "canada", loyaltyFactor = 3, totalPurchasesToDate = 10000 };
+                dynamic input1 = new
+                {
+                    name = "hello",
+                    email = "abcd@xyz.com",
+                    creditHistory = "good",
+                    country = "india",
+                    loyaltyFactor = 3,
+                    totalPurchasesToDate = 10000
+                };
                 dynamic input2 = new { totalOrders = 5, recurringItems = 2 };
-                dynamic input3 = new {noOfVisitsPerMonth= 10,percentageOfBuyingToVisit= 15};
+                dynamic input3 = new { noOfVisitsPerMonth = 10, percentageOfBuyingToVisit = 15 };
 
-                var inputs = new dynamic[]
+                var inputs = new object[]
                     {
                     input1,
                     input2,
@@ -42,8 +50,8 @@ namespace RulesEngineX.MS
 
 
                 string discountOffered = "No discount offered.";
-
                 List<RuleResultTree> resultList = await bre.ExecuteAllRulesAsync("Discount", inputs);
+                var successRules = resultList.Where(_ => _.IsSuccess).ToList();
 
                 resultList.OnSuccess((eventName) =>
                 {
@@ -66,5 +74,5 @@ namespace RulesEngineX.MS
             await Task.FromResult(true);
         }
     }
-   
+
 }
